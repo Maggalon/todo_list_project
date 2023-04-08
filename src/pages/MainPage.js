@@ -1,4 +1,3 @@
-import AddTask from "../components/AddTask";
 import Sorting from "../components/Sorting";
 import Priorities from "../components/Priorities";
 import Marks from "../components/Marks";
@@ -87,7 +86,7 @@ const MainPage = (props) => {
 
     return (
         <div>
-            <AddTask text='Добавить задачу' />
+            <button onClick={props.addTask} >Добавить задачу</button>
             <Sorting option={option} handleOptionChange={handleOptionChange} />
             <Priorities 
                         lowChecked={lowChecked}

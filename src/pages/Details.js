@@ -1,9 +1,9 @@
-const Details = ({task, goBack}) => {
+const Details = ({task, goBack, deleteTask, editTask}) => {
     return (
         <div>
             <button onClick={goBack}>Назад</button>
-            <button>Редактировать</button>
-            <button>Удалить</button>
+            <button onClick={editTask}>Редактировать</button>
+            <button onClick={() => deleteTask(task.id)}>Удалить</button>
             <div>
                 <div>
                     <h3>Название задачи</h3>

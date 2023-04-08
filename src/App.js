@@ -1,6 +1,8 @@
 import Card from './components/Card'
 import Priorities from './components/Priorities'
 import Marks from './components/Marks'
+import AddTask from './components/AddTask'
+import Sorting from './components/Sorting'
 import { useState } from 'react'
 
 const App = () => {
@@ -41,6 +43,7 @@ const App = () => {
   const [lowChecked, setLowChecked] = useState(true)
   const [normalChecked, setNormalChecked] = useState(true)
   const [highChecked, setHighChecked] = useState(true)
+  const [option, setOption] = useState('new')
   const [tasksToShow, setTasksToShow] = useState(tasks)
 
   const arrayUnique = (array) => {
@@ -105,8 +108,14 @@ const App = () => {
     setTasksToShow(handleMarksChange(designChecked, developmentChecked, researchChecked, lowChecked, normalChecked, checked))
   }
 
+  const handleOptionChange = (event) => {
+    setOption(event.target.value)
+  }
+
   return (
     <div>
+      <AddTask text='Добавить задачу' />
+      <Sorting option={option} handleOptionChange={handleOptionChange} />
       <Priorities 
                   lowChecked={lowChecked}
                   handleLowChange={handleLowChange}

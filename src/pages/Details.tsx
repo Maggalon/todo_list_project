@@ -1,4 +1,22 @@
-const Details = ({task, goBack, deleteTask, editTask}) => {
+import React from 'react'
+
+interface TaskProps {
+    id: number,
+    name: string,
+    created: string,
+    priority: string,
+    marks: Array<string>,
+    description: string
+}
+
+type Props = {
+    task: TaskProps,
+    goBack: any,
+    deleteTask: any,
+    editTask: any
+}
+
+const Details = ({task, goBack, deleteTask, editTask} : Props) => {
     return (
         <div>
             <button onClick={goBack}>Назад</button>

@@ -1,24 +1,40 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
+interface TaskProps {
+    id: number,
+    name: string,
+    created: string,
+    priority: string,
+    marks: Array<string>,
+    description: string
+}
 
-const EditPage = (props) => {
+type Props = {
+    curTask: TaskProps,
+    numOfTasks: number,
+    goBack: any,
+    addTask: any,
+}
 
-    const [name, setName] = useState(props.curTask.name)
-    const [priority, setPriority] = useState(props.curTask.priority)
-    const [designChecked, setDesignChecked] = useState(props.curTask.marks.includes('design'))
-    const [developmentChecked, setDevelopmentChecked] = useState(props.curTask.marks.includes('development'))
-    const [researchChecked, setResearchChecked] = useState(props.curTask.marks.includes('research'))
-    const [descriprion, setDescription] = useState(props.curTask.descriprion)
+const EditPage = ({curTask, numOfTasks, goBack, addTask} : Props) => {
 
-    const handleSubmit = (event) => {
+    const [name, setName] = useState(curTask.name)
+    const [priority, setPriority] = useState(curTask.priority)
+    const [designChecked, setDesignChecked] = useState(curTask.marks.includes('design'))
+    const [developmentChecked, setDevelopmentChecked] = useState(curTask.marks.includes('development'))
+    const [researchChecked, setResearchChecked] = useState(curTask.marks.includes('research'))
+    const [description, setDescription] = useState(curTask.description)
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const marks : string[] = []
         const newTask = {
-            id: props.curTask.id === 0 ? props.numOfTasks + 1 : props.curTask.id,
+            id: curTask.id === 0 ? numOfTasks + 1 : curTask.id,
             name: name,
-            created: props.curTask.created === '' ? 'now' : props.curTask.created,
+            created: curTask.created === '' ? 'now' : curTask.created,
             priority: priority,
-            marks: [],
-            descriprion: descriprion
+            marks: marks,
+            description: description
         }
         if (designChecked) newTask.marks.push('design')
         if (developmentChecked) newTask.marks.push('development')
@@ -29,9 +45,9 @@ const EditPage = (props) => {
 
     return (
         <div>
-            <button onClick={props.goBack}>Назад</button>
+            <button onClick={goBack}>Назад</button>
             <div>
-                <form onSubmit={(e) => props.addTask(handleSubmit(e))}>
+                <form onSubmit={(e) => addTask(handleSubmit(e))}>
                     <label>
                     Название задачи<br />
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -66,7 +82,7 @@ const EditPage = (props) => {
                     <br />
                     <label>
                     Описание<br />
-                    <textarea rows={10} cols={45} value={descriprion} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea rows={10} cols={45} value={description} onChange={(e) => setDescription(e.target.value)} />
                     </label>
                     <br />
                     <input type="submit" value="Сохранить" />

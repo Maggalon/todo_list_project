@@ -2,10 +2,25 @@ import Sorting from "../components/Sorting";
 import Priorities from "../components/Priorities";
 import Marks from "../components/Marks";
 import Card from "../components/Card";
-import { useState } from "react";
+import React, { useState } from "react";
 
 
-const MainPage = (props) => {
+interface TaskProps {
+    id: number,
+    name: string,
+    created: string,
+    priority: string,
+    marks: Array<string>,
+    description: string
+}
+
+type Props = {
+    tasks: Array<TaskProps>,
+    addTask: any,
+    showDetails: any
+}
+
+const MainPage = (props: Props) => {
 
     const tasks = props.tasks
 
@@ -18,7 +33,7 @@ const MainPage = (props) => {
     const [option, setOption] = useState('new')
     const [tasksToShow, setTasksToShow] = useState(tasks)
 
-    const arrayUnique = (array) => {
+    const arrayUnique = (array: any) => {
         var a = array.concat();
         for(var i=0; i<a.length; ++i) {
             for(var j=i+1; j<a.length; ++j) {
@@ -27,19 +42,19 @@ const MainPage = (props) => {
             }
         }
 
-        return a.sort((a, b) => a.id - b.id);
+        return a.sort((a : TaskProps, b : TaskProps) => a.id - b.id);
     }
 
-    const handleMarksChange = (designChecked, developmentChecked, researchChecked, lowChecked, normalChecked, highChecked) => {
-        const designTasks = designChecked ? tasks.filter(task => task.marks.includes('design')) : []
-        const developmentTasks = developmentChecked ? tasks.filter(task => task.marks.includes('development')) : []
-        const researchTasks = researchChecked ? tasks.filter(task => task.marks.includes('research')) : []
+    const handleMarksChange = (designChecked: boolean, developmentChecked: boolean, researchChecked: boolean, lowChecked: boolean, normalChecked: boolean, highChecked: boolean) => {
+        const designTasks = designChecked ? tasks.filter((task : TaskProps) => task.marks.includes('design')) : []
+        const developmentTasks = developmentChecked ? tasks.filter((task : TaskProps) => task.marks.includes('development')) : []
+        const researchTasks = researchChecked ? tasks.filter((task : TaskProps) => task.marks.includes('research')) : []
 
         let tempTasks = arrayUnique([ ...designTasks, ...developmentTasks, ...researchTasks])
 
-        tempTasks = lowChecked ? tempTasks : tempTasks.filter(task => task.priority !== 'low')
-        tempTasks = normalChecked ? tempTasks : tempTasks.filter(task => task.priority !== 'normal')
-        tempTasks = highChecked ? tempTasks : tempTasks.filter(task => task.priority !== 'high')
+        tempTasks = lowChecked ? tempTasks : tempTasks.filter((task : TaskProps) => task.priority !== 'low')
+        tempTasks = normalChecked ? tempTasks : tempTasks.filter((task : TaskProps) => task.priority !== 'normal')
+        tempTasks = highChecked ? tempTasks : tempTasks.filter((task : TaskProps) => task.priority !== 'high')
 
         return tempTasks
     }
@@ -80,8 +95,8 @@ const MainPage = (props) => {
         setTasksToShow(handleMarksChange(designChecked, developmentChecked, researchChecked, lowChecked, normalChecked, checked))
     }
 
-    const handleOptionChange = (event) => {
-        setOption(event.target.value)
+    const handleOptionChange = (event: Event) => {
+        setOption((event.target as any).value)
     }
 
     return (
@@ -104,12 +119,12 @@ const MainPage = (props) => {
                     handleResearchChange={handleResearchChange} />
             {
                 tasksToShow.map(task => <Card
-                                    showDetails={id => props.showDetails(id)}
+                                    showDetails={(id: string) => props.showDetails(id)}
                                     name={task.name}
                                     created={task.created}
                                     priority={task.priority}
                                     marks={task.marks}
-                                    id={task.id}
+                                    id={String(task.id)}
                                     key={task.id} />)
             }
         </div>

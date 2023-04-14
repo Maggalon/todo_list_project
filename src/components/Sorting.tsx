@@ -1,27 +1,43 @@
-import React from 'react'
+import React from 'react';
 
 type Props = {
-    option: string,
-    handleOptionChange: any
-}
+    option: string;
+    handleOptionChange: any;
+};
 
-const Sorting = ({ option, handleOptionChange } : Props) => {
+const Sorting = ({ option, handleOptionChange }: Props) => {
     return (
         <>
-            <h3>Сортировка</h3>
-            <form>
+        <div>
+            <h3 className='name_table'>Сортировка</h3>
+            <form className='table'>
                 <label>
-                <input type="radio" name="sorting" value='new' checked={option === 'new'} onChange={handleOptionChange} />
-                Новые
+                    <input
+                        className='sort_name'
+                        type="radio"
+                        name="sorting"
+                        value="new"
+                        checked={option === 'new'}
+                        onChange={handleOptionChange}
+                    />
+                    Новые
                 </label>
                 <br />
                 <label>
-                <input type="radio" name="sorting" value='old' checked={option === 'old'} onChange={handleOptionChange} />
-                Старые
+                    <input
+                        className='sort_name'
+                        type="radio"
+                        name="sorting"
+                        value="old"
+                        checked={option === 'old'}
+                        onChange={handleOptionChange}
+                    />
+                    Старые
                 </label>
             </form>
+        </div>
         </>
-    )
-}
+    );
+};
 
 export default Sorting;

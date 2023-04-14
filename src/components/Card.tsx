@@ -11,13 +11,13 @@ type Props = {
 
 const Card = ({ showDetails, created, priority, marks, id, name }: Props) => {
     return (
-        <div>
-            <h3 id={id} onClick={(e) => showDetails(Number((e.target as HTMLElement).id))}>
+        <div className='card'>
+            <h3 className='name' id={id} onClick={(e) => showDetails(Number((e.target as HTMLElement).id))}>
                 {name}
             </h3>
-            <p>Создано: {created}</p>
-            <p>Приоритет: {priority}</p>
-            <p>Отметки: {marks.join(', ')}</p>
+            <p className='soder'>Создано: {created}</p>
+            <p className='soder'>Приоритет: {priority}</p>
+            <p className='soder'>Отметки: {marks.join(', ')}</p>
         </div>
     );
 };

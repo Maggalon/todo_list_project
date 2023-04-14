@@ -18,16 +18,23 @@ const Marks = ({
     handleResearchChange,
 }: Props) => {
     return (
-        <>
-            <h3>Отметки</h3>
-            <form>
+        <div>
+            <h3 className='name_table'>Отметки</h3>
+            <form className='table'>
                 <label>
-                    <input type="checkbox" name="marks" checked={designChecked} onChange={handleDesignChange} />
+                    <input 
+                        className='mark' 
+                        type="checkbox" 
+                        name="marks" 
+                        checked={designChecked} 
+                        onChange={handleDesignChange} 
+                    />
                     Design
                 </label>
                 <br />
                 <label>
                     <input
+                        className='mark' 
                         type="checkbox"
                         name="marks"
                         checked={developmentChecked}
@@ -37,11 +44,17 @@ const Marks = ({
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" name="marks" checked={researchChecked} onChange={handleResearchChange} />
+                    <input
+                        className='mark' 
+                        type="checkbox"
+                        name="marks" 
+                        checked={researchChecked} 
+                        onChange={handleResearchChange} 
+                    />
                     Research
                 </label>
             </form>
-        </>
+        </div>
     );
 };
 

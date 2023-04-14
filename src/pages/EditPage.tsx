@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../style/editing.css"
 
 interface TaskProps {
     id: number;
@@ -43,20 +44,25 @@ const EditPage = ({ curTask, numOfTasks, goBack, addTask }: Props) => {
     };
 
     return (
-        <div>
-            <button onClick={goBack}>Назад</button>
-            <div>
+        <div className='editing-container'>
+            <button className='back-button1' onClick={goBack}>Назад</button>
+            <div className='soder-container'>
                 <form onSubmit={(e) => addTask(handleSubmit(e))}>
                     <label>
-                        Название задачи
+                        <div className='button-edit'>Название задачи</div>
                         <br />
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input 
+                            className="name-task1"
+                            type="text" 
+                            value={name} 
+                            onChange={(e) => setName(e.target.value)} 
+                        />
                     </label>
                     <br />
                     <label>
-                        Приоритет
+                        <div className='button-edit'>Приоритет</div>
                         <br />
-                        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+                        <select className='prioriti-select' value={priority} onChange={(e) => setPriority(e.target.value)}>
                             <option value="low">low</option>
                             <option value="normal">normal</option>
                             <option value="high">high</option>
@@ -64,51 +70,59 @@ const EditPage = ({ curTask, numOfTasks, goBack, addTask }: Props) => {
                     </label>
                     <br />
                     <label>
-                        Отметки
+                        <div className='button-edit'>Отметки</div>
                         <br />
+                        <div className='otm-container_'>
                         <label>
                             <input
+                                className='marks_'
                                 type="checkbox"
                                 name="marks"
                                 checked={designChecked}
                                 onChange={() => setDesignChecked(!designChecked)}
                             />
-                            Design
+                            <p>Design</p>
                         </label>
-                        <br />
                         <label>
                             <input
+                                className='marks_'
                                 type="checkbox"
                                 name="marks"
                                 checked={developmentChecked}
                                 onChange={() => setDevelopmentChecked(!developmentChecked)}
                             />
-                            Development
+                            <p>Development</p>
                         </label>
-                        <br />
                         <label>
                             <input
+                                className='marks_'
                                 type="checkbox"
                                 name="marks"
                                 checked={researchChecked}
                                 onChange={() => setResearchChecked(!researchChecked)}
                             />
-                            Research
+                            <p>Research</p>
                         </label>
+                        </div>
                     </label>
-                    <br />
                     <label>
-                        Описание
+                        <div className='button-edit'>Описание</div>
                         <br />
                         <textarea
+                            className='table_'
                             rows={10}
                             cols={45}
+                            maxLength={1000}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </label>
                     <br />
-                    <input type="submit" value="Сохранить" />
+                    <input 
+                        className='save-button'
+                        type="submit" 
+                        value="Сохранить" 
+                    />
                 </form>
             </div>
         </div>

@@ -1,8 +1,11 @@
 import Sorting from '../components/Sorting';
 import Priorities from '../components/Priorities';
 import Marks from '../components/Marks';
-import Card from '../components/Card';
-import React, { useState } from 'react';
+// import Card from '../components/Card';
+// import Tasks from '../components/Tasks';
+import React, { useState, lazy, Suspense } from 'react';
+import InfiniteScroll from 'react-infinite-scroller'
+import "../style/main.css"
 
 interface TaskProps {
     id: number;
@@ -19,8 +22,11 @@ type Props = {
     showDetails: any;
 };
 
+const Tasks = lazy(() => import('../components/Tasks'))
+
 const MainPage = (props: Props) => {
-    const tasks = props.tasks;
+    const tasks = props.tasks.filter(task => task.id <= 15);
+    let c = 16;
 
     const [designChecked, setDesignChecked] = useState(true);
     const [developmentChecked, setDevelopmentChecked] = useState(true);
@@ -30,6 +36,18 @@ const MainPage = (props: Props) => {
     const [highChecked, setHighChecked] = useState(true);
     const [option, setOption] = useState('new');
     const [tasksToShow, setTasksToShow] = useState(tasks);
+    const [hasMore, setHasMore] = useState(true)
+
+    const loading = async () => {
+        let newTasks = []
+        if (c + 15 > props.tasks.length) {
+            newTasks = props.tasks.filter(task => task.id >= c)
+            setHasMore(false)
+        } else {
+            newTasks = props.tasks.filter(task => task.id <= c + 15)
+        }
+        await setTasksToShow([...tasksToShow, ...newTasks])
+    }
 
     const arrayUnique = (array: any) => {
         const a = array.concat();
@@ -118,36 +136,59 @@ const MainPage = (props: Props) => {
     };
 
     return (
-        <div>
-            <button onClick={props.addTask}>Добавить задачу</button>
-            <Sorting option={option} handleOptionChange={handleOptionChange} />
-            <Priorities
-                lowChecked={lowChecked}
-                handleLowChange={handleLowChange}
-                normalChecked={normalChecked}
-                handleNormalChange={handleNormalChange}
-                highChecked={highChecked}
-                handleHighChange={handleHighChange}
-            />
-            <Marks
-                designChecked={designChecked}
-                handleDesignChange={handleDesignChange}
-                developmentChecked={developmentChecked}
-                handleDevelopmentChange={handleDevelopmentChange}
-                researchChecked={researchChecked}
-                handleResearchChange={handleResearchChange}
-            />
-            {tasksToShow.map((task) => (
-                <Card
-                    showDetails={(id: string) => props.showDetails(id)}
-                    name={task.name}
-                    created={task.created}
-                    priority={task.priority}
-                    marks={task.marks}
-                    id={String(task.id)}
-                    key={task.id}
-                />
-            ))}
+        <div className='base'>
+            <div className='sidebar'>
+                <div className='square'>
+                    <div className='filter-block'>
+                        <Sorting option={option} handleOptionChange={handleOptionChange} />
+                    </div>
+                </div>
+                <div className='square'>
+                    <div className='filter-block'>
+                        <Priorities
+                            lowChecked={lowChecked}
+                            handleLowChange={handleLowChange}
+                            normalChecked={normalChecked}
+                            handleNormalChange={handleNormalChange}
+                            highChecked={highChecked}
+                            handleHighChange={handleHighChange}
+                        />
+                    </div>
+                    <div className='filter-block'>
+                        <Marks
+                            designChecked={designChecked}
+                            handleDesignChange={handleDesignChange}
+                            developmentChecked={developmentChecked}
+                            handleDevelopmentChange={handleDevelopmentChange}
+                            researchChecked={researchChecked}
+                            handleResearchChange={handleResearchChange}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className='main'>
+                <button className='button' onClick={props.addTask}>Добавить задачу</button>
+                {/* {tasksToShow.map((task) => (
+                    <Card
+                        showDetails={(id: string) => props.showDetails(id)}
+                        name={task.name}
+                        created={task.created}
+                        priority={task.priority}
+                        marks={task.marks}
+                        id={String(task.id)}
+                        key={task.id}
+                    />
+                ))} */}
+                <Suspense fallback={<div>Loading...</div>}>
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={loading}
+                        hasMore={hasMore}
+                        loader={<div key={0}>Loading...</div>}>
+                        <Tasks tasks={tasksToShow} showDetails={(id: string) => props.showDetails(id)} />
+                    </InfiniteScroll>    
+                </Suspense>
+            </div>
         </div>
     );
 };

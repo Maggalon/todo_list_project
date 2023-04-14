@@ -2,6 +2,8 @@ import MainPage from './pages/MainPage';
 import Details from './pages/Details';
 import EditPage from './pages/EditPage';
 import React, { useState } from 'react';
+import default_tasks from './tasks'
+import "./style/reset.css"
 
 interface TaskProps {
     id: number;
@@ -13,40 +15,7 @@ interface TaskProps {
 }
 
 const App = () => {
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            name: 'Тестовая задача №1',
-            created: 'только что',
-            priority: 'normal',
-            marks: ['design', 'development'],
-            description: '',
-        },
-        {
-            id: 2,
-            name: 'Тестовая задача №2',
-            created: '5 минут назад',
-            priority: 'high',
-            marks: ['design'],
-            description: '',
-        },
-        {
-            id: 3,
-            name: 'Тестовая задача №3',
-            created: '9 часов назад',
-            priority: 'high',
-            marks: ['research'],
-            description: '',
-        },
-        {
-            id: 4,
-            name: 'Тестовая задача №4',
-            created: '20 октября 2020, 16:25',
-            priority: 'normal',
-            marks: ['design', 'development', 'research'],
-            description: '',
-        },
-    ]);
+    const [tasks, setTasks] = useState(default_tasks);
     const [page, setPage] = useState('main');
     const [taskID, setTaskID] = useState(0);
     const [addNew, setAddNew] = useState(true);

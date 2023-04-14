@@ -1,0 +1,80 @@
+body {
+    background-color: #f9fafe;
+  }
+  
+.details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25vw;
+  margin-right: 25vw;
+}
+
+@media screen and (max-width: 800px) {
+  .details {
+      margin-left: 5vw;
+      margin-right: 5vw;
+  }
+  
+}
+
+  .name-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .name {
+    font-size: 24px;
+    margin-right: 50px;
+  }
+  
+  .back-button {
+    box-sizing: border-box;
+    color: black;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid #efeff1;
+  }
+  
+  .redct-button {
+    box-sizing: border-box;
+    color: #deffff;
+    padding: 10px;
+    background: #0091de;
+    border-radius: 4px;
+  }
+  
+  .del-button {
+    margin-left: auto;
+    box-sizing: border-box;
+    color: #deffff;
+    padding: 10px;
+    background-color: #f34949;
+    border-radius: 4px;
+  }
+  
+  .task-container {
+    width: 100%;
+    text-align: left;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid #efeff1;
+    padding: 10px 20px;
+  }
+  
+  .name-task {
+    padding-top: 10px;
+    color: #7b7b7b;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .name-text {
+    padding-top: 2px;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  

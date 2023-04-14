@@ -19,23 +19,43 @@ const Priorities = ({
 }: Props) => {
     return (
         <>
-            <h3>Приоритет</h3>
-            <form>
+        <div>
+            <h3 className='name_table'>Приоритет</h3>
+            <form className='table'>
                 <label>
-                    <input type="checkbox" name="priority" checked={lowChecked} onChange={handleLowChange} />
+                    <input
+                        className='prioretet'
+                        type="checkbox" 
+                        name="priority" 
+                        checked={lowChecked}
+                        onChange={handleLowChange} 
+                    />
                     Low
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" name="priority" checked={normalChecked} onChange={handleNormalChange} />
+                    <input 
+                        className='prioretet'
+                        type="checkbox" 
+                        name="priority" 
+                        checked={normalChecked} 
+                        onChange={handleNormalChange} 
+                    />
                     Normal
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" name="priority" checked={highChecked} onChange={handleHighChange} />
+                    <input 
+                        className='prioretet'
+                        type="checkbox" 
+                        name="priority" 
+                        checked={highChecked} 
+                        onChange={handleHighChange} 
+                    />
                     High
                 </label>
             </form>
+        </div>
         </>
     );
 };

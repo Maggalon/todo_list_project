@@ -1,14 +1,6 @@
 import React from "react";
 import Card from "./Card";
-
-interface TaskProps {
-    id: number;
-    name: string;
-    created: string;
-    priority: string;
-    marks: Array<string>;
-    description: string;
-}
+import { TaskProps } from '../interfaces/TaskProps';
 
 type Props = {
     showDetails: any,

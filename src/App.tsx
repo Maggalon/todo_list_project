@@ -4,15 +4,7 @@ import EditPage from './pages/EditPage';
 import React, { useState } from 'react';
 import default_tasks from './tasks'
 import "./style/reset.css"
-
-interface TaskProps {
-    id: number;
-    name: string;
-    created: string;
-    priority: string;
-    marks: Array<string>;
-    description: string;
-}
+import { TaskProps } from './interfaces/TaskProps';
 
 const App = () => {
     const [tasks, setTasks] = useState(default_tasks);

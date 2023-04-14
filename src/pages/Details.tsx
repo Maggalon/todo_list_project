@@ -1,14 +1,6 @@
 import React from 'react';
 import "../style/view.css";
-
-interface TaskProps {
-    id: number;
-    name: string;
-    created: string;
-    priority: string;
-    marks: Array<string>;
-    description: string;
-}
+import { TaskProps } from '../interfaces/TaskProps';
 
 type Props = {
     task: TaskProps;

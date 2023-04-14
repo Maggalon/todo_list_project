@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import "../style/editing.css"
-
-interface TaskProps {
-    id: number;
-    name: string;
-    created: string;
-    priority: string;
-    marks: Array<string>;
-    description: string;
-}
+import { TaskProps } from '../interfaces/TaskProps';
 
 type Props = {
     curTask: TaskProps;

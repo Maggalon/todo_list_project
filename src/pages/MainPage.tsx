@@ -6,15 +6,7 @@ import Marks from '../components/Marks';
 import React, { useState, lazy, Suspense } from 'react';
 import InfiniteScroll from 'react-infinite-scroller'
 import "../style/main.css"
-
-interface TaskProps {
-    id: number;
-    name: string;
-    created: string;
-    priority: string;
-    marks: Array<string>;
-    description: string;
-}
+import { TaskProps } from '../interfaces/TaskProps';
 
 type Props = {
     tasks: Array<TaskProps>;
